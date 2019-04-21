@@ -15,48 +15,49 @@ public class ClientsEntity {
 	
 	@Id
 	@NotNull
-	@ApiModelProperty( value = "the client's id" )
-	@GeneratedValue( strategy = GenerationType.AUTO )
+	@ApiModelProperty( value = "the client id" )
+	@GeneratedValue( strategy = GenerationType.IDENTITY )
 	private long id;
 	
-	@ApiModelProperty( value = "the client's name", required = true )
+	@NotNull
+	@ApiModelProperty( value = "the client name", required = true )
 	@Column( name = "nombre", nullable = false )
 	private String name;
 	
-	@ApiModelProperty( value = "the client's surname" )
+	@ApiModelProperty( value = "the client surname" )
 	@Column( name = "apellidos" )
 	private String surname;
 	
-	@ApiModelProperty( value = "the client's address" )
+	@ApiModelProperty( value = "the client address" )
 	@Column( name = "direccion" )
 	private String address;
 	
-	@ApiModelProperty( value = "the client's town" )
+	@ApiModelProperty( value = "the client town" )
 	@Column( name = "poblacion" )
 	private String town;
 	
-	@ApiModelProperty( value = "the client's province" )
+	@ApiModelProperty( value = "the client province" )
 	@Column( name = "provincia" )
 	private String province;
 	
-	@ApiModelProperty( value = "the client's postal code" )
+	@ApiModelProperty( value = "the client postal code" )
 	@Column( name = "cp" )
 	private String postalCode;
 	
 	@NotNull
-	@ApiModelProperty( value = "the client's email", required = true )
+	@ApiModelProperty( value = "the client email", required = true )
 	@Column( name = "email", nullable = false )
 	private String email;
 	
-	@ApiModelProperty( value = "the client's birthday date" )
+	@ApiModelProperty( value = "the client birthday date" )
 	@Column( name = "fnac" )
 	private Integer birthDate;
 	
-	@ApiModelProperty( value = "the client's phone number" )
+	@ApiModelProperty( value = "the client phone number" )
 	@Column( name = "telefono" )
 	private String phone;
 	
-	@ApiModelProperty( value = "the client's mobile phone number" )
+	@ApiModelProperty( value = "the client mobile phone number" )
 	@Column( name = "movil" )
 	private String mobile;
 	
@@ -72,14 +73,14 @@ public class ClientsEntity {
 	/**
 	 * Set the ID
 	 *
-	 * @param id Client's ID
+	 * @param id client ID
 	 */
 	public void setId( long id ) {
 		this.id = id;
 	}
 	
 	/**
-	 * Get the client's name
+	 * Get the client name
 	 *
 	 * @return String
 	 */
@@ -90,14 +91,14 @@ public class ClientsEntity {
 	/**
 	 * Set a new name to the client
 	 *
-	 * @param name Client's name
+	 * @param name client name
 	 */
 	public void setName( String name ) {
 		this.name = name;
 	}
 	
 	/**
-	 * Get the client's surname
+	 * Get the client surname
 	 *
 	 *@return String
 	 */
@@ -107,7 +108,7 @@ public class ClientsEntity {
 	
 	/**
 	 * Set a new surname to the client
-	 * @param surname Client's surname
+	 * @param surname client surname
 	 */
 	public void setSurname( String surname ) {
 		this.surname = surname;
@@ -125,14 +126,14 @@ public class ClientsEntity {
 	/**
 	 * Set a new address to the client
 	 *
-	 * @param address Client's address
+	 * @param address client address
 	 */
 	public void setAddress( String address ) {
 		this.address = address;
 	}
 	
 	/**
-	 * Get the client's town
+	 * Get the client town
 	 *
 	 *@return String
 	 */
@@ -143,14 +144,14 @@ public class ClientsEntity {
 	/**
 	 * Set a new town to the client
 	 *
-	 * @param town Client's Town
+	 * @param town client Town
 	 */
 	public void setTown( String town ) {
 		this.town = town;
 	}
 	
 	/**
-	 * Get the client's province
+	 * Get the client province
 	 *
 	 *@return String
 	 */
@@ -161,14 +162,14 @@ public class ClientsEntity {
 	/**
 	 * Set a new province to the client
 	 *
-	 * @param province Client's province
+	 * @param province client province
 	 */
 	public void setProvince( String province ) {
 		this.province = province;
 	}
 	
 	/**
-	 * Get a client's postal code
+	 * Get a client postal code
 	 *
 	 *@return String
 	 */
@@ -179,14 +180,14 @@ public class ClientsEntity {
 	/**
 	 * Set a new postal code to the client
 	 *
-	 * @param postalCode Client's postal code
+	 * @param postalCode client postal code
 	 */
 	public void setPostalCode( String postalCode ) {
 		this.postalCode = postalCode;
 	}
 	
 	/**
-	 * Get the client's email
+	 * Get the client email
 	 *
 	 *@return String
 	 */
@@ -197,14 +198,14 @@ public class ClientsEntity {
 	/**
 	 * Set a new email to the client
 	 *
-	 * @param email Client's email
+	 * @param email client email
 	 */
 	public void setEmail( String email ) {
 		this.email = email;
 	}
 	
 	/**
-	 * Get the client's birth date in time
+	 * Get the client birth date in time
 	 *
 	 *@return Integer
 	 */
@@ -215,14 +216,14 @@ public class ClientsEntity {
 	/**
 	 * Set a new birth date to the client
 	 *
-	 * @param birthDate Client's birthday date
+	 * @param birthDate client birthday date
 	 */
 	public void setBirthDate( Integer birthDate ) {
 		this.birthDate = birthDate;
 	}
 	
 	/**
-	 * Get the client's phone number
+	 * Get the client phone number
 	 *
 	 *@return String
 	 */
@@ -233,14 +234,14 @@ public class ClientsEntity {
 	/**
 	 * Set a new phone number to a client
 	 *
-	 * @param phone Client's phone number
+	 * @param phone client phone number
 	 */
 	public void setPhone( String phone ) {
 		this.phone = phone;
 	}
 	
 	/**
-	 * Get the client's mobile phone number
+	 * Get the client mobile phone number
 	 *
 	 *@return String
 	 */
@@ -250,7 +251,7 @@ public class ClientsEntity {
 	
 	/**
 	 * Set a new mobile number to the client
-	 * @param mobile Client's mobile phone number
+	 * @param mobile client mobile phone number
 	 */
 	public void setMobile( String mobile ) {
 		this.mobile = mobile;

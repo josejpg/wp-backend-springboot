@@ -13,7 +13,6 @@ import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @RestController
 @RequestMapping( "/api/v1/clients" )
@@ -26,7 +25,7 @@ public class ClientsController {
 	/**
 	 * Get all clients list.
 	 *
-	 * @return the client's list
+	 * @return the client list
 	 */
 	@ApiOperation( value = "Find all clients", notes = "Return a list of clients" )
 	@RequestMapping( method = RequestMethod.GET )
@@ -43,7 +42,7 @@ public class ClientsController {
 	 *
 	 * @throws ResourceNotFoundException the resource not found exception
 	 */
-	@ApiOperation( value = "Find clients by ID", notes = "Return a list of clients" )
+	@ApiOperation( value = "Find client by ID", notes = "Return a client" )
 	@RequestMapping( value = "/{clientID}", method = RequestMethod.GET )
 	public ClientsEntity getClientByID( @PathVariable Long clientID ) throws ResourceNotFoundException {
 		return clientsRepository.findById( clientID )
