@@ -15,18 +15,35 @@ public class ClientsEntity {
 	
 	@Id
 	@NotNull
-	@ApiModelProperty( value = "the client id" )
+	@ApiModelProperty( value = "The ID" )
 	@GeneratedValue( strategy = GenerationType.IDENTITY )
 	private long id;
 	
 	@NotNull
-	@ApiModelProperty( value = "the client name", required = true )
+	@ApiModelProperty( value = "Name", required = true )
 	@Column( name = "nombre", nullable = false )
 	private String name;
 	
 	@ApiModelProperty( value = "the client surname" )
 	@Column( name = "apellidos" )
 	private String surname;
+	
+	@ApiModelProperty( value = "the client birthday date" )
+	@Column( name = "fnac" )
+	private Integer birthDate;
+	
+	@NotNull
+	@ApiModelProperty( value = "the client email", required = true )
+	@Column( name = "email", nullable = false )
+	private String email;
+	
+	@ApiModelProperty( value = "the client phone number" )
+	@Column( name = "telefono" )
+	private String phone;
+	
+	@ApiModelProperty( value = "the client mobile phone number" )
+	@Column( name = "movil" )
+	private String mobile;
 	
 	@ApiModelProperty( value = "the client address" )
 	@Column( name = "direccion" )
@@ -43,23 +60,6 @@ public class ClientsEntity {
 	@ApiModelProperty( value = "the client postal code" )
 	@Column( name = "cp" )
 	private String postalCode;
-	
-	@NotNull
-	@ApiModelProperty( value = "the client email", required = true )
-	@Column( name = "email", nullable = false )
-	private String email;
-	
-	@ApiModelProperty( value = "the client birthday date" )
-	@Column( name = "fnac" )
-	private Integer birthDate;
-	
-	@ApiModelProperty( value = "the client phone number" )
-	@Column( name = "telefono" )
-	private String phone;
-	
-	@ApiModelProperty( value = "the client mobile phone number" )
-	@Column( name = "movil" )
-	private String mobile;
 	
 	/**
 	 * Get the ID
