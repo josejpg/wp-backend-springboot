@@ -81,7 +81,7 @@ public class EventsController {
 		EventsEntity event =
 				eventsRepository
 						.findById( eventID )
-						.orElseThrow( () -> new ResourceNotFoundException( "Client not found on :: " + eventID ) );
+						.orElseThrow( () -> new ResourceNotFoundException( "Event not found on :: " + eventID ) );
 		event.setEvent( dataEvent.getEvent() );
 		event.setDate( dataEvent.getDate() );
 		
@@ -102,7 +102,7 @@ public class EventsController {
 	@RequestMapping( value = "/{eventID}", method = RequestMethod.DELETE )
 	public Map<String, Boolean> deleteEvent(
 			@PathVariable( value = "eventID" ) Long eventID
-	) throws ResourceNotFoundException, Exception {
+	) throws Exception {
 		EventsEntity event =
 				eventsRepository
 						.findById( eventID )

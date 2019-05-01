@@ -109,7 +109,7 @@ public class ClientsController {
 	@RequestMapping( value = "/{clientID}", method = RequestMethod.DELETE )
 	public Map<String, Boolean> deleteUser(
 			@PathVariable( value = "clientID" ) Long clientID
-	) throws ResourceNotFoundException, Exception {
+	) throws Exception {
 		ClientsEntity client =
 				clientsRepository
 						.findById( clientID )

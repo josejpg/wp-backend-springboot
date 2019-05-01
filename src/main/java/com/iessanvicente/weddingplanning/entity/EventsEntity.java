@@ -100,7 +100,7 @@ public class EventsEntity {
 	 *
 	 * @param active status
 	 */
-	public void setDate( Boolean active ) {
+	public void setActive( Boolean active ) {
 		this.active = active;
 	}
 }

@@ -81,7 +81,7 @@ public class ProvidersController {
 		ProvidersEntity provider =
 				providersRepository
 						.findById( providerID )
-						.orElseThrow( () -> new ResourceNotFoundException( "Client not found on :: " + providerID ) );
+						.orElseThrow( () -> new ResourceNotFoundException( "Provider not found on :: " + providerID ) );
 		if ( dataProvider.getCif() != null ) {
 			provider.setCif( dataProvider.getCif() );
 		}
@@ -130,7 +130,7 @@ public class ProvidersController {
 	@RequestMapping( value = "/{providerID}", method = RequestMethod.DELETE )
 	public Map<String, Boolean> deleteProvider(
 			@PathVariable( value = "providerID" ) Long providerID
-	) throws ResourceNotFoundException, Exception {
+	) throws Exception {
 		ProvidersEntity provider =
 				providersRepository
 						.findById( providerID )
