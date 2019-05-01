@@ -2,7 +2,6 @@ package com.iessanvicente.weddingplanning.entity;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -14,19 +13,24 @@ public class EventsEntity {
 	
 	@Id
 	@NotNull
-	@ApiModelProperty( value = "the event id" )
+	@ApiModelProperty( value = "The ID" )
 	@GeneratedValue( strategy = GenerationType.IDENTITY )
 	private long id;
 	
 	@NotNull
-	@ApiModelProperty( value = "the event name", required = true )
+	@ApiModelProperty( value = "Name", required = true )
 	@Column( name = "nombre", nullable = false )
 	private String event;
 	
 	@NotNull
-	@ApiModelProperty( value = "the event date", required = true )
+	@ApiModelProperty( value = "Date", required = true )
 	@Column( name = "fecha", nullable = false )
 	private Integer date;
+	
+	@NotNull
+	@ApiModelProperty( value = "Active", required = true )
+	@Column( name = "activo", nullable = false )
+	private Boolean active;
 	
 	/**
 	 * Get the ID
@@ -80,5 +84,23 @@ public class EventsEntity {
 	 */
 	public void setDate( Integer date ) {
 		this.date = date;
+	}
+	
+	/**
+	 * Get the active status
+	 *
+	 * @return Boolean
+	 */
+	public Boolean getActive() {
+		return active;
+	}
+	
+	/**
+	 * Set the active status
+	 *
+	 * @param active status
+	 */
+	public void setDate( Boolean active ) {
+		this.active = active;
 	}
 }
