@@ -20,6 +20,16 @@ public class ClientsEntity {
 	private long id;
 	
 	@NotNull
+	@ApiModelProperty( value = "the client email", required = true )
+	@Column( name = "email", nullable = false )
+	private String email;
+	
+	@NotNull
+	@ApiModelProperty( value = "the client password", required = true )
+	@Column( name = "password", nullable = false )
+	private String password;
+	
+	@NotNull
 	@ApiModelProperty( value = "Name", required = true )
 	@Column( name = "nombre", nullable = false )
 	private String name;
@@ -31,11 +41,6 @@ public class ClientsEntity {
 	@ApiModelProperty( value = "the client birthday date" )
 	@Column( name = "fnac" )
 	private Integer birthDate;
-	
-	@NotNull
-	@ApiModelProperty( value = "the client email", required = true )
-	@Column( name = "email", nullable = false )
-	private String email;
 	
 	@ApiModelProperty( value = "the client phone number" )
 	@Column( name = "telefono" )
@@ -203,6 +208,20 @@ public class ClientsEntity {
 	public void setEmail( String email ) {
 		this.email = email;
 	}
+	
+	/**
+	 * Get the client password
+	 *
+	 *@return String
+	 */
+	public String getPassword() { return password; }
+	
+	/**
+	 * Set a new password to the client
+	 *
+	 * @param password client password
+	 */
+	public void setPassword( String password ) { this.password = password; }
 	
 	/**
 	 * Get the client birth date in time

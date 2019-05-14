@@ -46,7 +46,7 @@ public class EventsController {
 	@RequestMapping( value = "/{eventID}", method = RequestMethod.GET )
 	public EventsEntity getEventByID( @PathVariable Long eventID ) throws ResourceNotFoundException {
 		return eventsRepository.findById( eventID )
-				.orElseThrow( () -> new ResourceNotFoundException( "Event not found on :: " + eventID ) );
+				.orElseThrow( () -> new ResourceNotFoundException( "Event", "ID", eventID ) );
 	}
 	
 	/**
@@ -81,7 +81,7 @@ public class EventsController {
 		EventsEntity event =
 				eventsRepository
 						.findById( eventID )
-						.orElseThrow( () -> new ResourceNotFoundException( "Event not found on :: " + eventID ) );
+						.orElseThrow( () -> new ResourceNotFoundException( "Event", "ID", eventID ) );
 		event.setEvent( dataEvent.getEvent() );
 		event.setDate( dataEvent.getDate() );
 		
@@ -106,7 +106,7 @@ public class EventsController {
 		EventsEntity event =
 				eventsRepository
 						.findById( eventID )
-						.orElseThrow( () -> new ResourceNotFoundException( "Event not found on :: " + eventID ) );
+						.orElseThrow( () -> new ResourceNotFoundException( "Event", "ID", eventID ) );
 		try {
 			eventsRepository.delete( event );
 			Map<String, Boolean> response = new HashMap<>();

@@ -46,7 +46,7 @@ public class ProvidersController {
 	@RequestMapping( value = "/{providerID}", method = RequestMethod.GET )
 	public ProvidersEntity getEventByID( @PathVariable Long providerID ) throws ResourceNotFoundException {
 		return providersRepository.findById( providerID )
-				.orElseThrow( () -> new ResourceNotFoundException( "Event not found on :: " + providerID ) );
+				.orElseThrow( () -> new ResourceNotFoundException( "Provider", "ID", providerID ) );
 	}
 	
 	/**
@@ -81,7 +81,7 @@ public class ProvidersController {
 		ProvidersEntity provider =
 				providersRepository
 						.findById( providerID )
-						.orElseThrow( () -> new ResourceNotFoundException( "Provider not found on :: " + providerID ) );
+						.orElseThrow( () -> new ResourceNotFoundException( "Provider", "ID", providerID ) );
 		if ( dataProvider.getCif() != null ) {
 			provider.setCif( dataProvider.getCif() );
 		}
@@ -134,7 +134,7 @@ public class ProvidersController {
 		ProvidersEntity provider =
 				providersRepository
 						.findById( providerID )
-						.orElseThrow( () -> new ResourceNotFoundException( "Event not found on :: " + providerID ) );
+						.orElseThrow( () -> new ResourceNotFoundException( "Provider", "ID", providerID ) );
 		try {
 			providersRepository.delete( provider );
 			Map<String, Boolean> response = new HashMap<>();

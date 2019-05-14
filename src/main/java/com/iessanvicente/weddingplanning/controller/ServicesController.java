@@ -46,7 +46,7 @@ public class ServicesController {
 	@RequestMapping( value = "/{serviceID}", method = RequestMethod.GET )
 	public ServicesEntity getServiceByID( @PathVariable Long serviceID ) throws ResourceNotFoundException {
 		return servicesRepository.findById( serviceID )
-				.orElseThrow( () -> new ResourceNotFoundException( "Service not found on :: " + serviceID ) );
+				.orElseThrow( () -> new ResourceNotFoundException( "Service", "ID", serviceID ) );
 	}
 	
 	/**
@@ -81,7 +81,7 @@ public class ServicesController {
 		ServicesEntity service =
 				servicesRepository
 						.findById( serviceID )
-						.orElseThrow( () -> new ResourceNotFoundException( "Service not found on :: " + serviceID ) );
+						.orElseThrow( () -> new ResourceNotFoundException( "Service", "ID", serviceID ) );
 		service.setService( dataService.getService() );
 		
 		final ServicesEntity updatedService = servicesRepository.save( service );
@@ -105,7 +105,7 @@ public class ServicesController {
 		ServicesEntity event =
 				servicesRepository
 						.findById( serviceID )
-						.orElseThrow( () -> new ResourceNotFoundException( "Event not found on :: " + serviceID ) );
+						.orElseThrow( () -> new ResourceNotFoundException( "Service", "ID", serviceID ) );
 		try {
 			servicesRepository.delete( event );
 			Map<String, Boolean> response = new HashMap<>();
