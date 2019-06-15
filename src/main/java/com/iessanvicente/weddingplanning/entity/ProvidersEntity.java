@@ -5,10 +5,12 @@ import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @ApiModel( "Model Providers" )
-@Table( name = "proveedores", schema = "proyectobd" )
+@Table( name = "proveedores", schema = "y6CQ6X1U7Z" )
 public class ProvidersEntity {
 	
 	@Id
@@ -59,6 +61,12 @@ public class ProvidersEntity {
 	@ApiModelProperty( value = "Mobile number" )
 	@Column( name = "movil" )
 	private String mobile;
+	
+	@ManyToMany( mappedBy = "providers", fetch = FetchType.LAZY )
+	Set<EventsEntity> events;
+	
+	@ManyToMany( mappedBy = "providers", fetch = FetchType.LAZY )
+	Set<ServicesEntity> services;
 	
 	/**
 	 * Get the ID
@@ -256,5 +264,21 @@ public class ProvidersEntity {
 	 */
 	public void setMobile( String mobile ) {
 		this.mobile = mobile;
+	}
+	
+	public Set<EventsEntity> getEvents() {
+		return events;
+	}
+	
+	public void setEvents( Set<EventsEntity> events ) {
+		this.events = events;
+	}
+	
+	public Set<ServicesEntity> getServices() {
+		return services;
+	}
+	
+	public void setServices( Set<ServicesEntity> services ) {
+		this.services = services;
 	}
 }

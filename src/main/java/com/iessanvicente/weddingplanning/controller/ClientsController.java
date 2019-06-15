@@ -10,11 +10,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping( "/api/v1/clients" )
@@ -24,6 +29,9 @@ public class ClientsController {
 	@Autowired
 	private ClientsRepository clientsRepository;
 	private Logger logger;
+	
+	@PersistenceContext
+	private EntityManager entityManager;
 	
 	/**
 	 * Get all clients list.
@@ -50,7 +58,7 @@ public class ClientsController {
 		try {
 			email = userData.get( "email" );
 			pws = userData.get( "password" );
-		} catch (Exception e) {
+		} catch ( Exception e ) {
 			response.put( "errorMessage", "Params has errors" );
 			return ResponseEntity.status( HttpStatus.BAD_REQUEST ).body( response );
 		}
@@ -60,7 +68,7 @@ public class ClientsController {
 					.orElseThrow( () -> new ResourceNotFoundException( "Client", "email", email ) );
 			
 			return ResponseEntity.status( HttpStatus.ACCEPTED ).body( client );
-		}catch ( Exception e ){
+		} catch ( Exception e ) {
 			response.put( "errorMessage", e.getMessage() );
 			return ResponseEntity.status( HttpStatus.INTERNAL_SERVER_ERROR ).body( response );
 		}
@@ -78,7 +86,8 @@ public class ClientsController {
 		String email;
 		try {
 			email = userData.get( "email" );
-		} catch (Exception e) {
+			System.out.println( email );
+		} catch ( Exception e ) {
 			response.put( "errorMessage", "Params has errors" );
 			return ResponseEntity.status( HttpStatus.BAD_REQUEST ).body( response );
 		}
@@ -87,8 +96,9 @@ public class ClientsController {
 			List<ClientsEntity> clients = clientsRepository.findByEmail( email )
 					.orElseThrow( () -> new ResourceNotFoundException( "Clients", "email", email ) );
 			
+			System.out.println( clients );
 			return ResponseEntity.status( HttpStatus.FOUND ).body( clients );
-		}catch ( Exception e ){
+		} catch ( Exception e ) {
 			response.put( "errorMessage", e.getMessage() );
 			return ResponseEntity.status( HttpStatus.INTERNAL_SERVER_ERROR ).body( response );
 		}
@@ -121,7 +131,7 @@ public class ClientsController {
 	@RequestMapping( method = RequestMethod.POST, produces = "application/json" )
 	public ResponseEntity createUser( @Valid @RequestBody ClientsEntity dataClient ) {
 		
-		if( clientsRepository.findByEmail( dataClient.getEmail() ) != null ) {
+		if ( clientsRepository.findByEmail( dataClient.getEmail() ) != null ) {
 			try {
 				return ResponseEntity.status( HttpStatus.CREATED ).body( clientsRepository.save( dataClient ) );
 			} catch ( Exception e ) {
@@ -152,7 +162,7 @@ public class ClientsController {
 						.findById( clientID )
 						.orElseThrow( () -> new ResourceNotFoundException( "Client", "ID", clientID ) );
 		client.setName( dataClient.getName() );
-		client.setSurname( dataClient.getSurname() );
+		client.setLastName( dataClient.getLastName() );
 		client.setEmail( dataClient.getEmail() );
 		client.setAddress( dataClient.getAddress() );
 		client.setTown( dataClient.getTown() );
@@ -161,9 +171,12 @@ public class ClientsController {
 		client.setBirthDate( dataClient.getBirthDate() );
 		client.setPhone( dataClient.getPhone() );
 		client.setMobile( dataClient.getMobile() );
+		client.setEvents( dataClient.getEvents() );
+		
 		final ClientsEntity updatedClient = clientsRepository.save( client );
 		return ResponseEntity.ok( updatedClient );
 	}
+	
 	/**
 	 * Update client password.
 	 *
@@ -174,7 +187,7 @@ public class ClientsController {
 	 *
 	 * @throws ResourceNotFoundException the resource not found exception
 	 */
-	@ApiOperation( value = "Update data client", notes = "Return a updated data client" )
+	@ApiOperation( value = "Update password client", notes = "Return a updated data client" )
 	@RequestMapping( value = "/{clientID}/password", method = RequestMethod.PUT, produces = "application/json" )
 	public ResponseEntity<ClientsEntity> updateUserPassword(
 			@PathVariable( value = "clientID" ) Long clientID,

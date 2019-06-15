@@ -1,15 +1,18 @@
 package com.iessanvicente.weddingplanning.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @ApiModel( "Model Events" )
-@Table( name = "eventos", schema = "proyectobd" )
-public class EventsEntity {
+@Table( name = "eventos", schema = "y6CQ6X1U7Z" )
+public class EventsEntity implements Serializable {
 	
 	@Id
 	@NotNull
@@ -31,6 +34,22 @@ public class EventsEntity {
 	@ApiModelProperty( value = "Active", required = true )
 	@Column( name = "activo", nullable = false )
 	private Boolean active;
+	
+	@JsonIgnore
+	@ManyToMany( fetch = FetchType.LAZY )
+	@JoinTable(
+			name = "proveedores_eventos_clientes",
+			joinColumns = @JoinColumn( name = "ref_evento" ),
+			inverseJoinColumns = @JoinColumn( name = "ref_proveedor" ) )
+	private Set<ProvidersEntity> providers;
+	
+	@JsonIgnore
+	@ManyToMany( fetch = FetchType.LAZY )
+	@JoinTable(
+			name = "proveedores_eventos_clientes",
+			joinColumns = @JoinColumn( name = "ref_evento" ),
+			inverseJoinColumns = @JoinColumn( name = "ref_cliente" ) )
+	private Set<ClientsEntity> clients;
 	
 	/**
 	 * Get the ID
@@ -102,5 +121,37 @@ public class EventsEntity {
 	 */
 	public void setActive( Boolean active ) {
 		this.active = active;
+	}
+	
+	/**
+	 * Get the providers list
+	 * @return Set<ProvidersEntity>
+	 */
+	public Set<ProvidersEntity> getProviders() {
+		return providers;
+	}
+	
+	/**
+	 * Set a new list of providers
+	 * @param providers list
+	 */
+	public void setProviders( Set<ProvidersEntity> providers ) {
+		this.providers = providers;
+	}
+	
+	/**
+	 * Get the client list
+	 * @return Set<ClientsEntity>
+	 */
+	public Set<ClientsEntity> getClients() {
+		return clients;
+	}
+	
+	/**
+	 * Set a new list of clients
+	 * @param clients list
+	 */
+	public void setClients( Set<ClientsEntity> clients ) {
+		this.clients = clients;
 	}
 }

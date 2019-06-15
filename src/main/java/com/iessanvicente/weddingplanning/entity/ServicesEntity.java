@@ -1,14 +1,16 @@
 package com.iessanvicente.weddingplanning.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 @Entity
 @ApiModel( "Model Services" )
-@Table( name = "servicios", schema = "proyectobd" )
+@Table( name = "servicios", schema = "y6CQ6X1U7Z" )
 public class ServicesEntity {
 	
 	@Id
@@ -21,6 +23,14 @@ public class ServicesEntity {
 	@ApiModelProperty( value = "Name", required = true )
 	@Column( name = "nombre", nullable = false )
 	private String service;
+	
+	@JsonIgnore
+	@ManyToMany( fetch = FetchType.LAZY )
+	@JoinTable(
+			name = "proveedores_servicios",
+			joinColumns = @JoinColumn( name = "ref_servicio" ),
+			inverseJoinColumns = @JoinColumn( name = "ref_proveedor" ) )
+	private Set<ProvidersEntity> providers;
 	
 	/**
 	 * Get the ID
@@ -56,6 +66,22 @@ public class ServicesEntity {
 	 */
 	public void setService( String service ) {
 		this.service = service;
+	}
+	
+	/**
+	 * Get the providers list
+	 * @return Set<ProvidersEntity>
+	 */
+	public Set<ProvidersEntity> getProviders() {
+		return providers;
+	}
+	
+	/**
+	 * Set a new list of providers
+	 * @param providers list
+	 */
+	public void setProviders( Set<ProvidersEntity> providers ) {
+		this.providers = providers;
 	}
 	
 }
